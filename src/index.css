@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+/* body {
+  background-color: black;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+} */
+
+.card {
+  height: 200px;
+  width: 300px;
+  border: 1px solid rgba(144, 195, 231, 0.772);
+}
+
+h1 {
+  margin-top: 5px;
+  text-align: center;
+}
+
+button {
+  background-color: rgb(99, 175, 247);
+  color: white;
+  border-radius: 10%;
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px;
+
+}
