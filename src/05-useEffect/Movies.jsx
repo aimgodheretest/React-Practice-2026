@@ -4,17 +4,24 @@ import "./Movies.css";
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function fetchMoviesHandler() {
     setIsLoading(true);
+    setError("");
 
     try {
-      const response = await fetch("https://swapi.info/api/films");
+      const response = await fetch("https://swapi.info/api/film");
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
 
       const data = await response.json();
       setMovies(data);
     } catch (error) {
       console.error("Error fetching movies:", error);
+      setError(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -38,6 +45,8 @@ const Movies = () => {
           <p>Loading movies, please wait...</p>
         </div>
       )}
+
+      {error && <p className="error-message">{error}</p>}
 
       {!isLoading && (
         <div className="movies-grid">
