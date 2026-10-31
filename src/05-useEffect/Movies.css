@@ -160,3 +160,57 @@
     margin-top: 20px;
     text-align: center;
 }
+
+.add-movie-form {
+    max-width: 650px;
+    margin: 20px auto 15px;
+    padding: 40px 30px 30px;
+    background-color: white;
+    border-radius: 12px;
+    color: #222;
+}
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-control label {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-control input,
+.form-control textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font: inherit;
+}
+
+.add-movie-btn,
+.fetch-btn {
+    display: block;
+    margin: 15px auto 0;
+    padding: 12px 30px;
+    background-color: #240052;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.add-movie-btn:hover,
+.fetch-btn:hover {
+    background-color: #3b0875;
+}
+
+.fetch-movies-container {
+    max-width: 650px;
+    margin: 15px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+}

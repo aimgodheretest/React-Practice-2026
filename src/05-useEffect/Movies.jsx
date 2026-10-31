@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import "./Movies.css";
 
 const Movies = () => {
@@ -6,6 +6,14 @@ const Movies = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Form state
+  const [movieData, setMovieData] = useState({
+    title: "",
+    openingText: "",
+    releaseDate: "",
+  });
+
+  // Automatically fetch movies when component loads
   useEffect(() => {
     async function fetchMoviesHandler() {
       setIsLoading(true);
@@ -27,20 +35,101 @@ const Movies = () => {
         setIsLoading(false);
       }
     }
+
     fetchMoviesHandler();
   }, []);
+
+  // Handle input changes
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+
+    setMovieData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  // Handle form submission
+  function addMovieHandler(event) {
+    event.preventDefault();
+
+    const NewMovieObj = {
+      title: movieData.title,
+      openingText: movieData.openingText,
+      releaseDate: movieData.releaseDate,
+    };
+
+    console.log(NewMovieObj);
+
+    // Reset form after submission
+    setMovieData({
+      title: "",
+      openingText: "",
+      releaseDate: "",
+    });
+  }
 
   return (
     <div className="movies-container">
       <h1 className="movies-heading">Star Wars Movies</h1>
 
-      {/* <button
-        className="fetch-btn"
-        onClick={fetchMoviesHandler}
-        disabled={isLoading}
-      >
-        {isLoading ? "Fetching Movies..." : "Fetch Movies"}
-      </button> */}
+      {/* Add Movie Form */}
+      <form className="add-movie-form" onSubmit={addMovieHandler}>
+        <div className="form-control">
+          <label htmlFor="title">Title</label>
+
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={movieData.title}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="openingText">Opening Text</label>
+
+          <textarea
+            id="openingText"
+            name="openingText"
+            rows="4"
+            value={movieData.openingText}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="releaseDate">Release Date</label>
+
+          <input
+            type="date"
+            id="releaseDate"
+            name="releaseDate"
+            value={movieData.releaseDate}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <button type="submit" className="add-movie-btn">
+          Add Movie
+        </button>
+      </form>
+
+      {/* Fetch Movies Button */}
+      <div className="fetch-movies-container">
+        <button
+          className="fetch-btn"
+          onClick={() => {
+            console.log("Movies are already fetched automatically.");
+          }}
+        >
+          Fetch Movies
+        </button>
+      </div>
 
       {isLoading && (
         <div className="loader">
@@ -51,7 +140,7 @@ const Movies = () => {
 
       {error && <p className="error-message">{error}</p>}
 
-      {!isLoading && (
+      {!isLoading && !error && (
         <div className="movies-grid">
           {movies.map((movie) => (
             <div className="movie-card" key={movie.episode_id}>
